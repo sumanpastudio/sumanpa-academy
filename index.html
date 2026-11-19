@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Sumanpa Academy Newsletter</title>
+  <meta name="description" content="Sign up for news, tips and offers from Sumanpa Academy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Nunito Sans is a backup for devices that don't have Avenir installed -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Sumanpa colours — swap in your exact codes here if you have them */
+      --green: #1f5c3a;
+      --green-light: #2c7a4f;
+      --gold: #c9a14a;
+      --gold-dark: #a9842f;
+      --brown: #2a1c12;
+      --brown-line: #4a3526;
+      --black: #0d0b09;
+      --white: #ffffff;
+      --muted: #d9cfc4;
+      --error: #f2a08c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(31,92,58,0.35), transparent 50%),
+        radial-gradient(circle at 90% 95%, rgba(201,161,74,0.12), transparent 45%),
+        var(--black);
+      color: var(--white);
+      font-family: "Avenir", "Avenir Next", "Nunito Sans", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--brown);
+      border: 1px solid var(--brown-line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .banner {
+      background: var(--green);
+      padding: 30px 30px 26px;
+      border-bottom: 4px solid var(--gold);
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 800;
+      margin: 0 0 8px;
+    }
+    h1 {
+      font-weight: 800;
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      color: var(--white);
+    }
+    .intro { color: var(--muted); margin: 0; font-size: 15px; }
+    .body { padding: 28px 30px 24px; }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; min-width: 0; }
+    label.field { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--white); }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 13px 14px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      font-family: inherit;
+    }
+    input[type="text"]:focus, input[type="email"]:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--muted);
+      margin: 2px 0 22px;
+      cursor: pointer;
+    }
+    .consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--green-light); flex-shrink: 0; }
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button:hover { background: var(--gold-dark); }
+    button:disabled { opacity: 0.6; cursor: wait; }
+    .message { margin: 14px 0 0; font-size: 14px; min-height: 20px; }
+    .message.error { color: var(--error); }
+    .done { text-align: center; padding: 34px 30px 24px; }
+    .done .check {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--green); color: var(--gold);
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 800; margin: 0 auto 16px;
+    }
+    .done h2 { font-weight: 800; margin: 0 0 8px; }
+    .done p { color: var(--muted); margin: 0; }
+    .footer {
+      padding: 16px 30px 20px;
+      border-top: 1px solid var(--brown-line);
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .footer a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .footer a:hover { text-decoration: underline; }
+    .hidden { display: none; }
+    @media (max-width: 380px) { .row { flex-direction: column; gap: 0; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div id="form-view">
+      <div class="banner">
+        <p class="eyebrow">Sumanpa Academy</p>
+        <h1>Join our newsletter</h1>
+        <p class="intro">Tips, news, classes and members-only offers, sent straight to your inbox.</p>
+      </div>
+
+      <form id="signup-form" class="body" novalidate>
+        <div class="row">
+          <div>
+            <label class="field" for="first_name">First name</label>
+            <input type="text" id="first_name" autocomplete="given-name" required />
+          </div>
+          <div>
+            <label class="field" for="last_name">Last name</label>
+            <input type="text" id="last_name" autocomplete="family-name" required />
+          </div>
+        </div>
+
+        <label class="field" for="email">Email address</label>
+        <input type="email" id="email" autocomplete="email" required />
+
+        <label class="consent">
+          <input type="checkbox" id="consent" />
+          <span>Yes, I'd like to receive emails from Sumanpa Academy. I can unsubscribe at any time.</span>
+        </label>
+
+        <button type="submit" id="submit-btn">Subscribe</button>
+        <p class="message" id="message" role="status"></p>
+      </form>
+    </div>
+
+    <div id="done-view" class="done hidden">
+      <div class="check">✓</div>
+      <h2>You're on the list!</h2>
+      <p id="done-text">Thanks for joining. Watch your inbox for our next newsletter.</p>
+    </div>
+
+    <p class="footer">Questions? Message us on Instagram <a href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">@sumanpaacademy</a></p>
+  </main>
+
+  <script>
+    // Your Supabase project (public values — safe to keep on this page)
+    const SUPABASE_URL = "https://sdkdkefxhvotegfyeosp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_JhJg5PsKhjwkhNQoaYhxhQ_VdXyM92X";
+
+    const form = document.getElementById("signup-form");
+    const btn = document.getElementById("submit-btn");
+    const msg = document.getElementById("message");
+
+    function showError(text) {
+      msg.textContent = text;
+      msg.className = "message error";
+    }
+
+    function showDone(text) {
+      if (text) document.getElementById("done-text").textContent = text;
+      document.getElementById("form-view").classList.add("hidden");
+      document.getElementById("done-view").classList.remove("hidden");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "";
+
+      const firstName = document.getElementById("first_name").value.trim();
+      const lastName = document.getElementById("last_name").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const consent = document.getElementById("consent").checked;
+
+      if (!firstName) return showError("Please enter your first name.");
+      if (!lastName) return showError("Please enter your last name.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError("Please enter a valid email address.");
+      if (!consent) return showError("Please tick the box to agree to receive our emails.");
+
+      btn.disabled = true;
+      btn.textContent = "Subscribing…";
+
+      try {
+        const res = await fetch(SUPABASE_URL + "/rest/v1/subscribers", {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email, consent: true })
+        });
+
+        if (res.ok) {
+          showDone();
+          return;
+        }
+
+        const err = await res.json().catch(() => ({}));
+        if (err.code === "23505") {
+          showDone("Good news, you're already subscribed. Watch your inbox for our next newsletter.");
+          return;
+        }
+        showError("Something went wrong. Please try again in a moment.");
+      } catch (error) {
+        showError("Couldn't connect. Check your internet and try again.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Subscribe";
+      }
+    });
+  </script>
+</body>
+</html>
