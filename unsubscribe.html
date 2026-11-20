@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Unsubscribe | Sumanpa Academy</title>
+  <link rel="icon" href="/icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --green:#1f5c3a; --gold:#c9a14a; --gold-dark:#a9842f; --brown:#2a1c12; --line:#4a3526; --black:#0d0b09; --white:#fff; --muted:#d9cfc4; --error:#f2a08c; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+      background: radial-gradient(circle at 20% 15%, rgba(31,92,58,.45), transparent 50%), var(--black);
+      color:var(--white); font-family:"Avenir","Avenir Next","Nunito Sans","Segoe UI",sans-serif; }
+    .card { width:100%; max-width:440px; background:var(--brown); border:1px solid var(--line); border-radius:20px; overflow:hidden; text-align:center; }
+    .top { background:var(--green); border-bottom:4px solid var(--gold); padding:26px; }
+    .top img { height:64px; margin:0 auto 10px; display:block; }
+    .top p { margin:0; color:var(--gold); font-weight:800; letter-spacing:.2em; text-transform:uppercase; font-size:12px; }
+    .body { padding:28px; }
+    h1 { margin:0 0 10px; font-size:24px; font-weight:900; }
+    p.txt { color:var(--muted); margin:0 0 22px; line-height:1.6; }
+    button, a.btn { display:inline-block; border:none; border-radius:999px; padding:13px 24px; font:inherit; font-weight:800; cursor:pointer; text-decoration:none; }
+    button { background:var(--gold); color:var(--black); width:100%; }
+    button:hover { background:var(--gold-dark); }
+    button:disabled { opacity:.6; cursor:wait; }
+    a.btn { color:var(--gold); }
+    .err { color:var(--error); margin-top:14px; min-height:20px; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="top"><img src="/logo-mask.png" alt="" /><p>Sumanpa Academy</p></div>
+    <div class="body" id="ask">
+      <h1>Unsubscribe?</h1>
+      <p class="txt">You'll stop receiving the Sumanpa Academy newsletter. You can join again any time.</p>
+      <button id="go">Yes, unsubscribe me</button>
+      <p class="err" id="err"></p>
+      <a class="btn" href="/">No, take me to the website</a>
+    </div>
+    <div class="body hidden" id="done">
+      <h1>You're unsubscribed</h1>
+      <p class="txt">You won't receive any more newsletters from us. Thank you for being part of the community.</p>
+      <a class="btn" href="/">Visit Sumanpa Academy</a>
+    </div>
+  </main>
+  <script>
+    const FN_URL = "https://sdkdkefxhvotegfyeosp.supabase.co/functions/v1/unsubscribe";
+    const KEY = "sb_publishable_JhJg5PsKhjwkhNQoaYhxhQ_VdXyM92X";
+    const token = new URLSearchParams(location.search).get("t");
+    const btn = document.getElementById("go"), err = document.getElementById("err");
+    if (!token) { btn.disabled = true; err.textContent = "This unsubscribe link is incomplete. Please use the link in your email."; }
+    btn.addEventListener("click", async () => {
+      btn.disabled = true; btn.textContent = "Please wait…"; err.textContent = "";
+      try {
+        const res = await fetch(FN_URL, { method: "POST", headers: { "Content-Type": "application/json", "apikey": KEY }, body: JSON.stringify({ token }) });
+        if (res.ok) { document.getElementById("ask").classList.add("hidden"); document.getElementById("done").classList.remove("hidden"); return; }
+        err.textContent = "We couldn't find that link. Message us on Instagram @sumanpaacademy and we'll remove you.";
+      } catch (e) {
+        err.textContent = "Couldn't connect. Check your internet and try again.";
+      }
+      btn.disabled = false; btn.textContent = "Yes, unsubscribe me";
+    });
+  </script>
+</body>
+</html>

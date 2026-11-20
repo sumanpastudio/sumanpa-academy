@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin | Sumanpa Academy</title>
+  <meta name="theme-color" content="#1f5c3a" />
+  <link rel="icon" href="/icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --green:#1f5c3a; --green-deep:#153f28; --green-light:#2c7a4f; --gold:#c9a14a; --gold-dark:#a9842f;
+      --brown:#2a1c12; --brown-mid:#3a2819; --line:#4a3526; --black:#0d0b09; --white:#fff; --muted:#d9cfc4;
+      --error:#f2a08c; --ok:#8fd19e;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background: radial-gradient(circle at 10% 0%, rgba(31,92,58,.35), transparent 45%), var(--black);
+      color:var(--white); font-family:"Avenir","Avenir Next","Nunito Sans","Segoe UI",sans-serif; line-height:1.5; }
+    .hidden { display:none !important; }
+    .wrap { max-width:1100px; margin:0 auto; padding:0 20px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; border:none; border-radius:999px; padding:11px 20px;
+      font:inherit; font-weight:800; font-size:14px; cursor:pointer; text-decoration:none; transition: background .15s, transform .15s; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+    .btn-gold { background:var(--gold); color:var(--black); } .btn-gold:hover { background:var(--gold-dark); }
+    .btn-ghost { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,.25); } .btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+    input[type=text], input[type=email], input[type=password], input[type=search], textarea {
+      width:100%; padding:12px 14px; border-radius:10px; border:2px solid transparent; background:var(--white); color:var(--black);
+      font:inherit; font-size:15px; }
+    input:focus, textarea:focus { outline:none; border-color:var(--gold); }
+    label { display:block; font-size:13px; font-weight:700; margin:0 0 6px; color:var(--muted); }
+    .msg { min-height:20px; font-size:14px; margin:10px 0 0; }
+    .msg.err { color:var(--error); } .msg.ok { color:var(--ok); }
+
+    /* Login */
+    .login { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .login-card { width:100%; max-width:400px; background:var(--brown); border:1px solid var(--line); border-radius:20px; overflow:hidden; }
+    .login-top { background:var(--green); border-bottom:4px solid var(--gold); padding:28px; text-align:center; }
+    .login-top img { height:70px; margin:0 auto 10px; display:block; }
+    .login-top h1 { margin:0; font-size:22px; font-weight:900; }
+    .login-top p { margin:4px 0 0; color:var(--gold); font-size:12px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    .login-body { padding:26px 28px 28px; }
+    .login-body input { margin-bottom:14px; }
+    .login-body .btn { width:100%; padding:14px; border-radius:10px; }
+
+    /* App */
+    header.bar { position:sticky; top:0; z-index:10; background:rgba(13,11,9,.9); backdrop-filter:blur(10px); border-bottom:1px solid rgba(201,161,74,.2); }
+    .bar-in { display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .brand { display:flex; align-items:center; gap:10px; }
+    .brand .mark { width:36px; height:36px; border-radius:9px; background:var(--green); border:1px solid var(--gold); display:grid; place-items:center; }
+    .brand .mark img { width:20px; height:30px; object-fit:contain; }
+    .brand b { font-weight:900; } .brand span { color:var(--gold); font-weight:900; }
+    .brand .tag { margin-left:6px; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--black); background:var(--gold); padding:3px 8px; border-radius:999px; }
+    .bar-right { display:flex; gap:10px; align-items:center; }
+    .who { color:var(--muted); font-size:13px; }
+
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:28px 0 22px; }
+    .stat { background:var(--brown); border:1px solid var(--line); border-radius:16px; padding:18px 20px; position:relative; overflow:hidden; }
+    .stat::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--gold); }
+    .stat .k { color:var(--muted); font-size:13px; font-weight:700; }
+    .stat .v { font-size:34px; font-weight:900; line-height:1.1; margin-top:4px; }
+
+    .tabs { display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--line); margin-bottom:22px; }
+    .tab { background:none; border:none; color:var(--muted); font:inherit; font-weight:800; font-size:15px; padding:12px 14px; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-1px; }
+    .tab.on { color:var(--gold); border-bottom-color:var(--gold); }
+
+    .panel { background:var(--brown); border:1px solid var(--line); border-radius:18px; padding:20px; margin-bottom:40px; }
+    .tools { display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:14px; }
+    .tools input { max-width:320px; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th { text-align:left; color:var(--gold); font-size:12px; letter-spacing:.08em; text-transform:uppercase; padding:10px 12px; border-bottom:1px solid var(--line); white-space:nowrap; }
+    td { padding:12px; border-bottom:1px solid rgba(74,53,38,.6); vertical-align:top; }
+    tr:hover td { background:rgba(255,255,255,.02); }
+    .pill { display:inline-block; font-size:12px; font-weight:800; padding:3px 10px; border-radius:999px; }
+    .pill.on { background:rgba(44,122,79,.35); color:var(--ok); }
+    .pill.off { background:rgba(242,160,140,.15); color:var(--error); }
+    .empty { color:var(--muted); text-align:center; padding:30px 10px; }
+    .note { color:var(--muted); font-size:13px; }
+
+    .compose { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .compose .field { margin-bottom:14px; }
+    .compose textarea { min-height:280px; resize:vertical; line-height:1.6; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:4px; }
+    .preview { background:#f4efe6; border-radius:14px; padding:14px; color:#2a1c12; }
+    .pv { background:#fff; border-radius:12px; overflow:hidden; }
+    .pv-top { background:var(--green); border-bottom:4px solid var(--gold); padding:18px 20px; color:#fff; }
+    .pv-top small { color:var(--gold); font-weight:800; letter-spacing:.15em; text-transform:uppercase; font-size:11px; }
+    .pv-top div { font-size:19px; font-weight:800; margin-top:4px; word-wrap:break-word; }
+    .pv-body { padding:20px; font-size:15px; line-height:1.65; min-height:120px; word-wrap:break-word; }
+    .pv-body p { margin:0 0 14px; }
+    .pv-btn { margin:0 20px 20px; display:inline-block; background:var(--gold); color:#0d0b09; font-weight:800; padding:10px 18px; border-radius:999px; font-size:14px; }
+    .pv-foot { background:var(--brown); color:var(--muted); font-size:11px; padding:14px 20px; line-height:1.6; }
+    .pv-foot u { color:var(--gold); }
+
+    @media (max-width: 820px) {
+      .compose { grid-template-columns:1fr; }
+      .stats { grid-template-columns:1fr 1fr; }
+      .who { display:none; }
+    }
+    @media (max-width: 480px) { .stats { grid-template-columns:1fr; } .brand .tag { display:none; } }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <section class="login hidden" id="login-view">
+    <div class="login-card">
+      <div class="login-top">
+        <img src="/logo-mask.png" alt="" />
+        <h1>Admin sign in</h1>
+        <p>Sumanpa Academy</p>
+      </div>
+      <form class="login-body" id="login-form" novalidate>
+        <label for="l_email">Email</label>
+        <input type="email" id="l_email" autocomplete="username" required />
+        <label for="l_pass">Password</label>
+        <input type="password" id="l_pass" autocomplete="current-password" required />
+        <button class="btn btn-gold" id="l_btn" type="submit">Sign in</button>
+        <p class="msg err" id="l_msg"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <div class="hidden" id="app-view">
+    <header class="bar">
+      <div class="wrap bar-in">
+        <div class="brand">
+          <div class="mark"><img src="/logo-mask.png" alt="" /></div>
+          <b>Sumanpa</b><span>Academy</span><em class="tag">Admin</em>
+        </div>
+        <div class="bar-right">
+          <span class="who" id="who"></span>
+          <a class="btn btn-ghost" href="/" target="_blank" rel="noopener">View site</a>
+          <button class="btn btn-ghost" id="logout">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="stats">
+        <div class="stat"><div class="k">Active subscribers</div><div class="v" id="s_active">–</div></div>
+        <div class="stat"><div class="k">Unsubscribed</div><div class="v" id="s_unsub">–</div></div>
+        <div class="stat"><div class="k">Session requests</div><div class="v" id="s_book">–</div></div>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab on" data-tab="subs">Subscribers</button>
+        <button class="tab" data-tab="book">Session requests</button>
+        <button class="tab" data-tab="write">Write newsletter</button>
+        <button class="tab" data-tab="sent">Sent</button>
+      </nav>
+
+      <!-- Subscribers -->
+      <section class="panel" id="tab-subs">
+        <div class="tools">
+          <input type="search" id="q_subs" placeholder="Search name or email…" />
+          <div class="actions">
+            <button class="btn btn-ghost" id="refresh">Refresh</button>
+            <button class="btn btn-gold" id="export">Download list (CSV)</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Joined</th></tr></thead>
+            <tbody id="subs_rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Write -->
+      <section class="panel hidden" id="tab-book">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Contact</th><th>Message</th><th>Received</th></tr></thead>
+            <tbody id="book_rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="tab-write">
+        <div class="compose">
+          <div>
+            <div class="field">
+              <label for="w_subject">Subject</label>
+              <input type="text" id="w_subject" placeholder="e.g. This month at Sumanpa Academy" />
+            </div>
+            <div class="field">
+              <label for="w_body">Message</label>
+              <textarea id="w_body" placeholder="Hi {first_name},&#10;&#10;Write your newsletter here. Leave an empty line between paragraphs."></textarea>
+              <p class="note">Type <b>{first_name}</b> and each person sees their own first name.</p>
+            </div>
+            <div class="field">
+              <label for="w_addr">Business mailing address (required by law in every email)</label>
+              <input type="text" id="w_addr" placeholder="Street, City, Province/State, Postal code" />
+            </div>
+            <div class="actions">
+              <button class="btn btn-ghost" id="w_test">Send a test to me</button>
+              <button class="btn btn-gold" id="w_send">Send to all subscribers</button>
+            </div>
+            <p class="msg" id="w_msg"></p>
+          </div>
+          <div>
+            <label>Preview</label>
+            <div class="preview">
+              <div class="pv">
+                <div class="pv-top"><small>Sumanpa Academy</small><div id="pv_subject">Your subject</div></div>
+                <div class="pv-body" id="pv_body"><p style="color:#999">Your message will appear here.</p></div>
+                <span class="pv-btn">Visit Sumanpa Academy</span>
+                <div class="pv-foot">You're receiving this because you subscribed at sumanpaacademy.com.<br>Sumanpa Academy<span id="pv_addr"></span><br>Instagram <u>@sumanpaacademy</u> · <u>Unsubscribe</u></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sent -->
+      <section class="panel hidden" id="tab-sent">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Subject</th><th>Sent to</th><th>Date</th></tr></thead>
+            <tbody id="sent_rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://sdkdkefxhvotegfyeosp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_JhJg5PsKhjwkhNQoaYhxhQ_VdXyM92X";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+    const fmt = (d) => new Date(d).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+    let subscribers = [];
+
+    // ---------- Sign in ----------
+    async function show() {
+      const { data: { session } } = await sb.auth.getSession();
+      $("login-view").classList.toggle("hidden", !!session);
+      $("app-view").classList.toggle("hidden", !session);
+      if (session) { $("who").textContent = session.user.email; loadAll(); }
+    }
+    $("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      $("l_msg").textContent = "";
+      $("l_btn").disabled = true; $("l_btn").textContent = "Signing in…";
+      const { error } = await sb.auth.signInWithPassword({ email: $("l_email").value.trim(), password: $("l_pass").value });
+      $("l_btn").disabled = false; $("l_btn").textContent = "Sign in";
+      if (error) { $("l_msg").textContent = "Wrong email or password."; return; }
+      show();
+    });
+    $("logout").addEventListener("click", async () => { await sb.auth.signOut(); show(); });
+
+    // ---------- Tabs ----------
+    document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === t));
+      ["subs", "book", "write", "sent"].forEach(n => $("tab-" + n).classList.toggle("hidden", n !== t.dataset.tab));
+    }));
+
+    // ---------- Data ----------
+    async function loadAll() { await Promise.all([loadSubs(), loadBookings(), loadSent()]); }
+
+    async function loadSubs() {
+      const { data, error } = await sb.from("subscribers").select("first_name,last_name,email,unsubscribed,created_at").order("created_at", { ascending: false });
+      if (error) { $("subs_rows").innerHTML = `<tr><td colspan="4" class="empty">Couldn't load subscribers: ${esc(error.message)}</td></tr>`; return; }
+      subscribers = data || [];
+      $("s_active").textContent = subscribers.filter(s => !s.unsubscribed).length;
+      $("s_unsub").textContent = subscribers.filter(s => s.unsubscribed).length;
+      $("w_send").textContent = `Send to all ${subscribers.filter(s => !s.unsubscribed).length} subscribers`;
+      renderSubs();
+    }
+    function renderSubs() {
+      const q = $("q_subs").value.trim().toLowerCase();
+      const rows = subscribers.filter(s => !q || `${s.first_name} ${s.last_name} ${s.email}`.toLowerCase().includes(q));
+      $("subs_rows").innerHTML = rows.length ? rows.map(s => `<tr>
+        <td>${esc(s.first_name)} ${esc(s.last_name || "")}</td>
+        <td>${esc(s.email)}</td>
+        <td><span class="pill ${s.unsubscribed ? "off" : "on"}">${s.unsubscribed ? "Unsubscribed" : "Subscribed"}</span></td>
+        <td>${fmt(s.created_at)}</td></tr>`).join("")
+        : `<tr><td colspan="4" class="empty">No subscribers found.</td></tr>`;
+    }
+    $("q_subs").addEventListener("input", renderSubs);
+    $("refresh").addEventListener("click", loadAll);
+    $("export").addEventListener("click", () => {
+      const lines = [["First name", "Last name", "Email", "Status", "Joined"]].concat(
+        subscribers.map(s => [s.first_name, s.last_name || "", s.email, s.unsubscribed ? "Unsubscribed" : "Subscribed", new Date(s.created_at).toISOString()]));
+      const csv = lines.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+      a.download = "sumanpa-subscribers.csv";
+      a.click();
+    });
+
+    async function loadBookings() {
+      const { data, error } = await sb.from("bookings").select("*").order("created_at", { ascending: false });
+      if (error) { $("book_rows").innerHTML = `<tr><td colspan="4" class="empty">Couldn't load requests: ${esc(error.message)}</td></tr>`; return; }
+      $("s_book").textContent = data.length;
+      $("book_rows").innerHTML = data.length ? data.map(b => `<tr>
+        <td>${esc(b.name)}</td>
+        <td>${esc(b.email)}${b.phone ? "<br>" + esc(b.phone) : ""}</td>
+        <td>${esc(b.message || "")}</td>
+        <td>${fmt(b.created_at)}</td></tr>`).join("")
+        : `<tr><td colspan="4" class="empty">No session requests yet.</td></tr>`;
+    }
+
+    async function loadSent() {
+      const { data, error } = await sb.from("newsletters").select("*").order("created_at", { ascending: false });
+      if (error) { $("sent_rows").innerHTML = `<tr><td colspan="3" class="empty">Couldn't load history: ${esc(error.message)}</td></tr>`; return; }
+      $("sent_rows").innerHTML = data.length ? data.map(n => `<tr><td>${esc(n.subject)}</td><td>${n.sent_count} people</td><td>${fmt(n.created_at)}</td></tr>`).join("")
+        : `<tr><td colspan="3" class="empty">No newsletters sent yet.</td></tr>`;
+    }
+
+    // ---------- Write & preview ----------
+    try { $("w_addr").value = localStorage.getItem("sa_addr") || ""; } catch (e) {}
+    function preview() {
+      $("pv_subject").textContent = $("w_subject").value || "Your subject";
+      const body = $("w_body").value.trim();
+      $("pv_body").innerHTML = body
+        ? esc(body).replaceAll("{first_name}", "Ama").split(/\n\s*\n/).map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("")
+        : `<p style="color:#999">Your message will appear here.</p>`;
+      const a = $("w_addr").value.trim();
+      $("pv_addr").textContent = a ? " · " + a : "";
+      try { localStorage.setItem("sa_addr", a); } catch (e) {}
+    }
+    ["w_subject", "w_body", "w_addr"].forEach(id => $(id).addEventListener("input", preview));
+
+    async function send(mode) {
+      const subject = $("w_subject").value.trim(), message = $("w_body").value.trim(), address = $("w_addr").value.trim();
+      const m = $("w_msg");
+      m.className = "msg err";
+      if (!subject) return m.textContent = "Please add a subject.";
+      if (!message) return m.textContent = "Please write a message.";
+      if (!address) return m.textContent = "Please add your business mailing address.";
+      if (mode === "all") {
+        const n = subscribers.filter(s => !s.unsubscribed).length;
+        if (!confirm(`Send "${subject}" to ${n} subscribers now? This can't be undone.`)) return;
+      }
+      const btns = [$("w_test"), $("w_send")];
+      btns.forEach(b => b.disabled = true);
+      m.className = "msg"; m.textContent = mode === "test" ? "Sending test…" : "Sending… please keep this page open.";
+      const { data, error } = await sb.functions.invoke("send-newsletter", { body: { subject, message, address, mode } });
+      btns.forEach(b => b.disabled = false);
+      if (error || data?.error) { m.className = "msg err"; m.textContent = "Not sent: " + (data?.error || error.message); return; }
+      if (data.errors?.length) { m.className = "msg err"; m.textContent = `Sent to ${data.sent}, but some failed. Try again later.`; return; }
+      m.className = "msg ok";
+      m.textContent = mode === "test" ? "Test sent! Check sumanpastudio@gmail.com." : `Sent to ${data.sent} subscribers!`;
+      if (mode === "all") loadSent();
+    }
+    $("w_test").addEventListener("click", () => send("test"));
+    $("w_send").addEventListener("click", () => send("all"));
+
+    sb.auth.onAuthStateChange((evt) => { if (evt === "SIGNED_OUT") show(); });
+    show();
+  </script>
+</body>
+</html>
