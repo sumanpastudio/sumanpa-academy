@@ -257,6 +257,25 @@
     const fmt = (d) => new Date(d).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
     let subscribers = [];
 
+    // Call one of our Supabase functions with the signed-in admin's own login token
+    async function callFn(name, body) {
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) return { error: "You're signed out. Please sign in again." };
+      let res;
+      try {
+        res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${session.access_token}`, "apikey": SUPABASE_KEY, "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+      } catch (e) {
+        return { error: `Couldn't reach the "${name}" function (blocked before it answered).` };
+      }
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) return { error: `${out.error || out.message || out.msg || "Error"} (code ${res.status})` };
+      return { data: out };
+    }
+
     // ---------- Sign in ----------
     async function show() {
       const { data: { session } } = await sb.auth.getSession();
@@ -339,8 +358,8 @@
     const statusClass = s => ["delivered","opened","clicked"].includes(s) ? "on" : (["bounced","complained","failed"].includes(s) ? "off" : "mid");
     async function loadActivity() {
       $("act_rows").innerHTML = `<tr><td colspan="4" class="empty">Loading…</td></tr>`;
-      const { data, error } = await sb.functions.invoke("resend-admin", { body: { action: "emails" } });
-      if (error || data?.error) { $("act_rows").innerHTML = `<tr><td colspan="4" class="empty">Couldn't load email activity: ${esc(data?.error || error.message)}</td></tr>`; return; }
+      const { data, error } = await callFn("resend-admin", { action: "emails" });
+      if (error) { $("act_rows").innerHTML = `<tr><td colspan="4" class="empty">Couldn't load email activity: ${esc(error)}</td></tr>`; return; }
       const rows = data.emails || [];
       $("act_rows").innerHTML = rows.length ? rows.map(e => `<tr>
         <td>${esc(e.to)}</td><td>${esc(e.subject)}</td>
@@ -354,9 +373,9 @@
     $("sync").addEventListener("click", async () => {
       const m = $("sync_msg"), b = $("sync");
       b.disabled = true; m.className = "msg"; m.textContent = "Copying your subscribers to Resend… this can take a minute.";
-      const { data, error } = await sb.functions.invoke("resend-admin", { body: { action: "sync" } });
+      const { data, error } = await callFn("resend-admin", { action: "sync" });
       b.disabled = false;
-      if (error || data?.error) { m.className = "msg err"; m.textContent = "Sync failed: " + (data?.error || error.message); return; }
+      if (error) { m.className = "msg err"; m.textContent = "Sync failed: " + error; return; }
       m.className = "msg ok"; m.textContent = `Done: ${data.synced} of ${data.total} subscribers are now in Resend too.`;
     });
 
@@ -388,9 +407,9 @@
       const btns = [$("w_test"), $("w_send")];
       btns.forEach(b => b.disabled = true);
       m.className = "msg"; m.textContent = mode === "test" ? "Sending test…" : "Sending… please keep this page open.";
-      const { data, error } = await sb.functions.invoke("send-newsletter", { body: { subject, message, address, mode } });
+      const { data, error } = await callFn("send-newsletter", { subject, message, address, mode });
       btns.forEach(b => b.disabled = false);
-      if (error || data?.error) { m.className = "msg err"; m.textContent = "Not sent: " + (data?.error || error.message); return; }
+      if (error) { m.className = "msg err"; m.textContent = "Not sent: " + error; return; }
       if (data.errors?.length) { m.className = "msg err"; m.textContent = `Sent to ${data.sent}, but some failed. Try again later.`; return; }
       m.className = "msg ok";
       m.textContent = mode === "test" ? "Test sent! Check sumanpastudio@gmail.com." : `Sent to ${data.sent} subscribers!`;
