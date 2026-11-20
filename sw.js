@@ -1,6 +1,6 @@
 // Sumanpa Academy app: keeps the site available offline after the first visit.
-const CACHE = "sumanpa-v2";
-const FILES = ["/", "/index.html", "/manifest.json", "/icon-192.png", "/icon-512.png"];
+const CACHE = "sumanpa-v3";
+const FILES = ["/", "/index.html", "/manifest.json", "/icon-192.png", "/icon-512.png", "/logo-mask.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)));

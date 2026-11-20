@@ -104,13 +104,63 @@
     .hero h1 em { font-style: normal; color: var(--gold); }
     .hero p.lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 600px; margin: 0 0 34px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
-    .hero-badge {
-      position: absolute; right: -40px; bottom: -40px; width: 340px; height: 340px; border-radius: 50%;
-      border: 2px dashed rgba(201,161,74,0.25);
+    .hero { min-height: 88vh; display: flex; align-items: center; }
+    .hero .wrap { position: relative; z-index: 2; }
+    /* Logo mask in the background */
+    .hero-mask {
+      position: absolute; z-index: 1; right: 6%; top: 50%;
+      height: 104%; aspect-ratio: 94 / 223;
+      transform: translateY(-50%);
+      background: url("/logo-mask.png") center / contain no-repeat;
+      opacity: 0;
+      filter: drop-shadow(0 0 40px rgba(201,161,74,0.25));
+      animation: maskIn 2.2s ease-out 0.3s forwards, maskFloat 9s ease-in-out 2.5s infinite;
+      pointer-events: none;
     }
-    .hero-badge::after {
-      content: ""; position: absolute; inset: 40px; border-radius: 50%;
-      border: 2px solid rgba(201,161,74,0.15);
+    .hero-glow {
+      position: absolute; z-index: 0; right: 2%; top: 50%; width: 46vw; height: 46vw; max-width: 640px; max-height: 640px;
+      transform: translateY(-50%); border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,161,74,0.16), transparent 62%);
+      animation: glow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes maskIn { from { opacity: 0; transform: translateY(-46%) scale(1.06); } to { opacity: 0.28; transform: translateY(-50%) scale(1); } }
+    @keyframes maskFloat { 0%,100% { transform: translateY(-50%); } 50% { transform: translateY(-52%); } }
+    @keyframes glow { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+    /* Animated 3D headline */
+    .hero h1 { perspective: 900px; }
+    .hero h1 .line { display: block; }
+    .hero h1 .ch {
+      display: inline-block; opacity: 0;
+      transform-origin: 50% 100%;
+      transform: translateY(0.5em) rotateX(-95deg);
+      animation: letterUp 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+      animation-delay: calc(var(--i) * 45ms + 250ms);
+      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+    .hero h1 .sp { display: inline-block; width: 0.28em; }
+    .hero h1 .gold .ch {
+      background: linear-gradient(100deg, #a9842f 0%, #f1d58e 22%, #c9a14a 40%, #a9842f 60%, #f1d58e 80%, #c9a14a 100%);
+      background-size: 300% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.5));
+      animation: letterUp 0.9s cubic-bezier(.2,.8,.2,1) forwards, shimmer 5s linear 2s infinite;
+      animation-delay: calc(var(--i) * 45ms + 250ms), 2s;
+    }
+    @keyframes letterUp { to { opacity: 1; transform: none; } }
+    @keyframes shimmer { from { background-position: 0% 50%; } to { background-position: 300% 50%; } }
+    .hero .fade-up { opacity: 0; transform: translateY(16px); animation: fadeUp 0.9s ease forwards; }
+    .hero .eyebrow.fade-up { animation-delay: 0.1s; }
+    .hero .lead.fade-up { animation-delay: 1.2s; }
+    .hero .hero-actions.fade-up { animation-delay: 1.45s; }
+    @keyframes fadeUp { to { opacity: 1; transform: none; } }
+    .brand-mark img { width: 22px; height: 30px; object-fit: contain; }
+    @media (max-width: 760px) {
+      .hero { min-height: 82vh; }
+      .hero-mask { right: -14%; height: 92%; }
+      @keyframes maskIn { from { opacity: 0; } to { opacity: 0.18; } }
     }
 
     /* Sections */
@@ -272,6 +322,8 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
+      .hero h1 .ch, .hero .fade-up { animation: none !important; opacity: 1; transform: none; }
+      .hero-mask { animation: none; opacity: 0.25; }
     }
   </style>
 </head>
@@ -280,7 +332,7 @@
   <header class="nav">
     <div class="wrap nav-inner">
       <a href="#top" class="brand" aria-label="Sumanpa Academy home">
-        <div class="brand-mark">SA</div>
+        <div class="brand-mark"><img src="/logo-mask.png" alt="" /></div>
         <div class="brand-name">Sumanpa <span>Academy</span></div>
       </a>
       <nav class="nav-links" id="nav-links">
@@ -298,15 +350,19 @@
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow">For Ghanaians everywhere</p>
-        <h1>Life. Business.<br /><em>The World.</em></h1>
-        <p class="lead">Sumanpa Academy is a studio where we share real knowledge about living well, building a business and understanding the world, rooted in who we are as Ghanaians.</p>
-        <div class="hero-actions">
+        <p class="eyebrow fade-up">For Ghanaians everywhere</p>
+        <h1 id="hero-title" aria-label="Life. Business. The World.">
+          <span class="line" data-text="Life. Business."></span>
+          <span class="line gold" data-text="The World."></span>
+        </h1>
+        <p class="lead fade-up">Sumanpa Academy is a studio where we share real knowledge about living well, building a business and understanding the world, rooted in who we are as Ghanaians.</p>
+        <div class="hero-actions fade-up">
           <a href="#classes" class="btn btn-gold">Explore classes</a>
           <a href="#join" class="btn btn-outline">Join the newsletter</a>
         </div>
       </div>
-      <div class="hero-badge" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-mask" aria-hidden="true"></div>
     </section>
     <div class="kente" aria-hidden="true"></div>
 
@@ -525,7 +581,7 @@
   <footer>
     <div class="wrap foot">
       <a href="#top" class="brand" aria-label="Back to top">
-        <div class="brand-mark">SA</div>
+        <div class="brand-mark"><img src="/logo-mask.png" alt="" /></div>
         <div class="brand-name">Sumanpa <span>Academy</span></div>
       </a>
       <p>Questions? Message us on Instagram <a class="ig" href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">@sumanpaacademy</a></p>
@@ -539,6 +595,33 @@
     const SUPABASE_KEY = "sb_publishable_JhJg5PsKhjwkhNQoaYhxhQ_VdXyM92X";
 
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Split the headline into letters for the 3D animation
+    (function () {
+      let i = 0;
+      document.querySelectorAll("#hero-title .line").forEach(line => {
+        line.setAttribute("aria-hidden", "true");
+        line.dataset.text.split("").forEach(c => {
+          const s = document.createElement("span");
+          if (c === " ") { s.className = "sp"; }
+          else { s.className = "ch"; s.textContent = c; s.style.setProperty("--i", i++); }
+          line.appendChild(s);
+        });
+      });
+    })();
+
+    // Gentle 3D tilt of the background mask as the mouse moves
+    (function () {
+      const mask = document.querySelector(".hero-mask");
+      const hero = document.querySelector(".hero");
+      if (!mask || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      hero.addEventListener("mousemove", (e) => {
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        mask.style.translate = (x * -18) + "px " + (y * -12) + "px";
+      });
+    })();
 
     // Mobile menu
     const navLinks = document.getElementById("nav-links");
