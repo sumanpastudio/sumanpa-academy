@@ -73,6 +73,19 @@
     .more a { font-weight: 800; text-decoration: none; color: var(--green); }
     .more a:hover { color: var(--gold-dark); }
 
+    .share { display: inline-flex; }
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 999px; border: 2px solid rgba(255,255,255,.3); background: transparent; color: var(--white); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+    .share-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .share-btn.light { border-color: var(--green); color: var(--green); min-height: 48px; padding: 10px 22px; font-size: 15px; }
+    .share-btn.light:hover { background: var(--green); color: var(--white); }
+    .share-end { max-width: 760px; margin: 0 auto 40px; padding: 24px 22px 0; text-align: center; border-top: 1px solid #e4dccd; }
+    .share-end p { margin: 0 0 14px; font-weight: 700; color: var(--ink); }
+    .share-menu { position: absolute; z-index: 100; min-width: 200px; background: var(--white); color: var(--ink); border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,.25); padding: 6px; display: flex; flex-direction: column; }
+    .share-menu[hidden] { display: none; }
+    .share-menu button, .share-menu a { display: block; text-align: left; background: none; border: none; font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; padding: 12px 14px; border-radius: 10px; cursor: pointer; min-height: 44px; }
+    .share-menu button:hover, .share-menu a:hover { background: #f1eadb; color: var(--green); }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px); background: var(--green); color: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 22px; border-radius: 999px; font-weight: 800; font-size: 15px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 200; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     footer { background: var(--black); color: var(--muted); padding: 34px 0; font-size: 14px; }
     footer a { color: var(--gold); font-weight: 800; text-decoration: none; }
 
@@ -102,8 +115,9 @@
       <p class="eyebrow">Sumanpa Academy · 01 Life</p>
       <h1>The Hard Part Is Not Starting: Five Tips for Staying Consistent</h1>
       <div class="meta">
-        <span>November 2026</span>
+        <span><time datetime="2026-11-22">22 November 2026</time></span>
         <a class="tag" href="/life#fitness">Fitness</a>
+        <div class="share"><button class="share-btn" type="button" aria-haspopup="true" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button></div>
       </div>
     </div>
   </section>
@@ -163,6 +177,20 @@
     <p class="note">This article is general information, not medical advice. If you have a health condition or concerns, check with your doctor before starting a new programme.</p>
   </article>
 
+  <div class="share-end">
+    <p>Found this helpful? Share it with someone who needs it.</p>
+    <div class="share"><button class="share-btn light" type="button" aria-haspopup="true" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button></div>
+  </div>
+
+  <div class="share-menu" id="share-menu" role="menu" hidden>
+    <button role="menuitem" data-act="copy">Copy link</button>
+    <a role="menuitem" data-act="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+    <a role="menuitem" data-act="facebook" target="_blank" rel="noopener">Facebook</a>
+    <a role="menuitem" data-act="x" target="_blank" rel="noopener">X (Twitter)</a>
+    <a role="menuitem" data-act="email">Email</a>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <nav class="more" aria-label="More articles">
     <a href="/life">&larr; All Life articles</a>
     <a href="/life#fitness">More on fitness &rarr;</a>
@@ -171,5 +199,50 @@
   <footer>
     <div class="wrap">Questions? Message us on Instagram <a href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">@sumanpaacademy</a></div>
   </footer>
+  <script>
+    (function () {
+      const url = "https://www.sumanpaacademy.com/life/staying-consistent";
+      const title = document.querySelector("h1").textContent.trim();
+      const text = title + " | Sumanpa Academy";
+      const menu = document.getElementById("share-menu");
+      const toast = document.getElementById("toast");
+      const enc = encodeURIComponent;
+      const links = {
+        whatsapp: "https://wa.me/?text=" + enc(text + " " + url),
+        facebook: "https://www.facebook.com/sharer/sharer.php?u=" + enc(url),
+        x: "https://twitter.com/intent/tweet?text=" + enc(text) + "&url=" + enc(url),
+        email: "mailto:?subject=" + enc(text) + "&body=" + enc("I thought you'd like this: " + url)
+      };
+      menu.querySelectorAll("a").forEach(a => a.href = links[a.dataset.act]);
+      let openBtn = null;
+
+      function showToast(msg) { toast.textContent = msg; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2200); }
+      function closeMenu() { menu.hidden = true; if (openBtn) openBtn.setAttribute("aria-expanded", "false"); openBtn = null; }
+      async function copyLink() {
+        try { await navigator.clipboard.writeText(url); showToast("Link copied"); }
+        catch (e) { window.prompt ? showToast(url) : showToast(url); }
+      }
+
+      document.querySelectorAll(".share-btn").forEach(btn => btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+          try { await navigator.share({ title: text, url }); } catch (err) {}
+          return;
+        }
+        if (openBtn === btn) return closeMenu();
+        const r = btn.getBoundingClientRect();
+        menu.hidden = false;
+        menu.style.top = (window.scrollY + r.bottom + 8) + "px";
+        menu.style.left = Math.max(12, Math.min(window.scrollX + r.left, window.scrollX + document.documentElement.clientWidth - menu.offsetWidth - 12)) + "px";
+        btn.setAttribute("aria-expanded", "true");
+        openBtn = btn;
+        menu.querySelector("button").focus();
+      }));
+      menu.querySelector('[data-act="copy"]').addEventListener("click", () => { copyLink(); closeMenu(); });
+      menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+      document.addEventListener("click", (e) => { if (!menu.contains(e.target)) closeMenu(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+    })();
+  </script>
 </body>
 </html>
