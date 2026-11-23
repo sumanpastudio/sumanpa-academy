@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hard Part Is Not Starting: Five Tips for Staying Consistent | Sumanpa Academy</title>
+  <meta name="description" content="Five tips for staying consistent with fitness, from more than ten years of training four to five times a week." />
+  <meta name="theme-color" content="#1f5c3a" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Nunito Sans is a backup for devices without Avenir -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #1f5c3a; --green-deep: #153f28; --green-light: #2c7a4f;
+      --gold: #c9a14a; --gold-dark: #a9842f;
+      --brown: #2a1c12; --brown-line: #4a3526;
+      --black: #0d0b09; --white: #ffffff; --muted: #d9cfc4;
+      --paper: #faf7f0; --ink: #2a1c12; --ink-soft: #5c4a3b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Avenir", "Avenir Next", "Nunito Sans", "Segoe UI", sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--green); }
+    img { max-width: 100%; display: block; }
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+    .kente { height: 10px; background: repeating-linear-gradient(90deg, var(--gold) 0 40px, var(--black) 40px 52px, var(--green-light) 52px 92px, var(--black) 92px 104px, var(--gold) 104px 120px, var(--brown) 120px 160px); }
+
+    header.nav { position: sticky; top: 0; z-index: 50; background: rgba(13,11,9,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,161,74,.18); color: var(--white); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); }
+    .brand-mark { width: 36px; height: 36px; border-radius: 9px; background: var(--green); border: 1px solid var(--gold); display: grid; place-items: center; }
+    .brand-mark img { width: 20px; height: 30px; object-fit: contain; }
+    .brand-name { font-weight: 900; font-size: 17px; }
+    .brand-name span { color: var(--gold); }
+    .back { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 15px; }
+    .back:hover { color: var(--gold); }
+
+    .head { background: linear-gradient(160deg, var(--green-deep), var(--black) 80%); color: var(--white); padding: 64px 0 52px; }
+    .head-in { max-width: 760px; margin: 0 auto; padding: 0 22px; }
+    .eyebrow { color: var(--gold); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; font-size: 12px; margin: 0 0 14px; }
+    h1 { font-size: clamp(32px, 5vw, 50px); line-height: 1.12; margin: 0 0 18px; font-weight: 900; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; color: var(--muted); font-size: 14px; font-weight: 600; }
+    .tag { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); background: rgba(201,161,74,.16); padding: 4px 10px; border-radius: 999px; text-decoration: none; }
+
+    article { max-width: 760px; margin: 0 auto; padding: 48px 22px 24px; font-size: 18px; }
+    article p { margin: 0 0 20px; }
+    .intro { font-size: 20px; line-height: 1.65; color: var(--ink); }
+    article h2 { color: var(--green); font-size: 30px; line-height: 1.2; font-weight: 900; margin: 52px 0 16px; }
+    article h3 { color: var(--green); font-size: 21px; line-height: 1.3; font-weight: 800; margin: 36px 0 10px; }
+    strong { font-weight: 800; }
+
+    .photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 36px auto; max-width: 1000px; padding: 0 22px; }
+    .photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
+
+    .learn { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 26px; align-items: start; margin: 8px 0 20px; }
+    .learn img { border-radius: 14px; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .callout { background: #f1eadb; border-radius: 14px; padding: 18px 20px; margin: 0; font-size: 17px; }
+
+    .cta { background: var(--green); color: var(--white); border-radius: 20px; padding: 32px; margin: 52px 0 24px; border-bottom: 4px solid var(--gold); }
+    .cta h2 { color: var(--white); margin: 0 0 10px; }
+    .cta p { color: #e9e0d2; margin: 0 0 20px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; background: var(--gold); color: var(--black); font-weight: 800; font-size: 16px; text-decoration: none; }
+    .btn:hover { background: var(--gold-dark); }
+    .note { font-size: 14px; color: var(--ink-soft); border-top: 1px solid #e4dccd; padding-top: 16px; margin-top: 28px; }
+
+    .more { max-width: 760px; margin: 0 auto 64px; padding: 0 22px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .more a { font-weight: 800; text-decoration: none; color: var(--green); }
+    .more a:hover { color: var(--gold-dark); }
+
+    footer { background: var(--black); color: var(--muted); padding: 34px 0; font-size: 14px; }
+    footer a { color: var(--gold); font-weight: 800; text-decoration: none; }
+
+    @media (max-width: 700px) {
+      article { font-size: 17px; }
+      .intro { font-size: 18px; }
+      .photos { grid-template-columns: 1fr; max-width: 480px; }
+      .learn { grid-template-columns: 1fr; }
+      .learn img { max-width: 280px; }
+      .cta { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="/" class="brand" aria-label="Sumanpa Academy home">
+        <div class="brand-mark"><img src="/logo-mask.png" alt="" /></div>
+        <div class="brand-name">Sumanpa <span>Academy</span></div>
+      </a>
+      <a href="/life" class="back">&larr; All Life articles</a>
+    </div>
+  </header>
+
+  <section class="head">
+    <div class="head-in">
+      <p class="eyebrow">Sumanpa Academy · 01 Life</p>
+      <h1>The Hard Part Is Not Starting: Five Tips for Staying Consistent</h1>
+      <div class="meta">
+        <span>November 2026</span>
+        <a class="tag" href="/life#fitness">Fitness</a>
+      </div>
+    </div>
+  </section>
+  <div class="kente" aria-hidden="true"></div>
+
+  <article>
+    <p class="intro">Starting a fitness routine is easy to romanticize. A new year, a new gym membership, a burst of motivation can get you started. The harder question is what happens in month six, when the motivation has gone quiet and life is loud. This article comes from more than ten years of training four to five times a week, in the gym, by choice, and learning that the answer is not more willpower. It is a system, a reason, and a bit of grace.</p>
+  </article>
+
+  <div class="photos">
+    <img src="/images/life-consistency-train-on-purpose.jpg" alt="Training at the gym. 4 to 5 days a week. On purpose." />
+    <img src="/images/life-consistency-train-together.jpg" alt="Training together at the gym. Train together. Stay consistent." />
+    <img src="/images/life-consistency-document-it.jpg" alt="A mirror selfie at the gym. Document it. Trust the process." />
+  </div>
+
+  <article style="padding-top: 0">
+    <h2>How we train</h2>
+    <p>Bodybuilding is our style, so we lift weights, and the gym is home base, four to five sessions a week. We add walks and soccer, weather-permitting, but the gym stays in the schedule because we enjoy it. We build our sessions around the big movements: lower body (squats, deadlifts, leg press, split squats), pulling (pull-ups, rows, pulldowns) and pressing with shoulder and arm work.</p>
+    <p>When we travel, hotel gyms rarely have the equipment we use at home, so we built a dumbbell-only full-body workout. A plan that needs nothing but dumbbells removes your excuse before you even have a chance to think of it.</p>
+    <p>The most important part is not the fitness programme. It is that we are on the same page about why we go to the gym. Training is a life decision for us, and we made it on purpose because we understand what it gives back over the long run. That shared reason is what keeps us going back especially on the days neither of us feels like going.</p>
+    <p>When we miss our workouts, it is because of circumstances outside of our control. We do not beat ourselves up. We make do with what we have until we are back in routine.</p>
+    <p><strong>Our goal.</strong> Stay consistent with our four to five sessions a week and document the progress along the way. Our workouts include lifts and movements that build strength and flexibility, so as long as we keep showing up, those gains will follow naturally. Tracking our workouts has helped more than anything else, because the numbers show you what is really happening.</p>
+
+    <h2>Five tips for staying consistent</h2>
+
+    <h3>1. Track it with numbers, photos and videos</h3>
+    <p>Tracking is the best accountability there is. When you log your workouts, you see the numbers move, up or down, and both tell you something useful. Take photos and short videos of your progress too. Once you start seeing change, you will wish you had a record of your early days. Take the first photo now, even if it feels awkward.</p>
+
+    <h3>2. Be intentional, because motivation will leave</h3>
+    <p>You will not always feel motivated, so do not build your plan on motivation. Build a habit instead. Habit becomes discipline, and discipline is what carries you through the months when enthusiasm is low, especially when the weather gets too cold, or even when the weather is too nice! Put your workout sessions in your calendar and treat them like any other commitment.</p>
+
+    <h3>3. Learn how your body works</h3>
+    <div class="learn">
+      <div>
+        <p>Learn how your body responds to training, how to feed it, and how different environments affect you, from travel to changing weather to a stressful week. It all matters. The more you understand, the better your decisions get.</p>
+        <p class="callout"><strong>Where to learn more:</strong> <em>Peak 40: The New Science of Mid-Life Health for a Leaner, Stronger Body and a Sharper Mind</em> by Dr. Marc Bubbs (Chelsea Green, 2021) is a book that we started with. Dr. Bubbs is a naturopathic doctor and performance nutrition lead for Canada Basketball. One of the biggest takeaways is the need for balance and playing the long game. It is not only for people in their 40s. If you are in your 20s, it is a heads up on what to avoid.</p>
+      </div>
+      <img src="/images/life-consistency-peak-40.jpg" alt="The book Peak 40 by Dr. Marc Bubbs. Balance matters. Play the long game." />
+    </div>
+
+    <h3>4. Play the long game</h3>
+    <p>Do not expect results overnight. We found that the hard part is not always starting. It is maintaining. That is exactly why you cannot rely on motivation, and why we think of a missed week as a detour, not a failure. Make do, then return to routine.</p>
+
+    <h3>5. Make it fun</h3>
+    <p>We chose bodybuilding, but that does not make it the best choice for you. Start with anything that gets you moving: walking, dancing, swimming, a sport with friends. The best programme is the one you will still be doing next year.</p>
+
+    <section class="cta">
+      <h2>Train with us</h2>
+      <p>If you are ready for a challenge, add your name to our free fitness accountability group. We will help you stick to your fitness goals, whatever that looks like for you.</p>
+      <a class="btn" href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">Join the accountability group</a>
+    </section>
+
+    <p class="note">This article is general information, not medical advice. If you have a health condition or concerns, check with your doctor before starting a new programme.</p>
+  </article>
+
+  <nav class="more" aria-label="More articles">
+    <a href="/life">&larr; All Life articles</a>
+    <a href="/life#fitness">More on fitness &rarr;</a>
+  </nav>
+
+  <footer>
+    <div class="wrap">Questions? Message us on Instagram <a href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">@sumanpaacademy</a></div>
+  </footer>
+</body>
+</html>

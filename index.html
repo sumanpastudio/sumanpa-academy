@@ -180,6 +180,9 @@
     .pillar .num { color: var(--gold); font-weight: 900; font-size: 14px; letter-spacing: 0.15em; }
     .pillar h3 { font-size: 24px; margin: 8px 0 10px; font-weight: 900; }
     .pillar p { color: var(--muted); margin: 0; }
+    a.pillar-link { display: block; text-decoration: none; color: inherit; transition: transform .2s, border-color .2s; }
+    a.pillar-link:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .pillar-more { display: inline-block; margin-top: 16px; color: var(--gold); font-weight: 800; font-size: 14px; }
 
     /* About */
     .about { background: var(--brown); }
@@ -373,11 +376,12 @@
           <p>Everything we share comes back to one of these.</p>
         </div>
         <div class="pillars">
-          <div class="pillar reveal">
+          <a href="/life" class="pillar pillar-link reveal">
             <div class="num">01</div>
             <h3>Life</h3>
             <p>Family, faith, health, growth and finding your way, at home or abroad.</p>
-          </div>
+            <span class="pillar-more">Read the articles &rarr;</span>
+          </a>
           <div class="pillar reveal">
             <div class="num">02</div>
             <h3>Business</h3>
