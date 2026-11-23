@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Past Newsletters | Sumanpa Academy</title>
+  <meta name="description" content="Read every Sumanpa Academy newsletter, newest first." />
+  <meta name="theme-color" content="#1f5c3a" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Nunito Sans is a backup for devices without Avenir -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #1f5c3a; --green-deep: #153f28; --green-light: #2c7a4f;
+      --gold: #c9a14a; --gold-dark: #a9842f;
+      --brown: #2a1c12; --brown-line: #4a3526;
+      --black: #0d0b09; --white: #ffffff; --muted: #d9cfc4;
+      --paper: #faf7f0; --ink: #2a1c12; --ink-soft: #5c4a3b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--black); color: var(--white); font-family: "Avenir", "Avenir Next", "Nunito Sans", "Segoe UI", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+    .kente { height: 10px; background: repeating-linear-gradient(90deg, var(--gold) 0 40px, var(--black) 40px 52px, var(--green-light) 52px 92px, var(--black) 92px 104px, var(--gold) 104px 120px, var(--brown) 120px 160px); }
+
+    header.nav { position: sticky; top: 0; z-index: 50; background: rgba(13,11,9,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,161,74,.18); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-mark { width: 36px; height: 36px; border-radius: 9px; background: var(--green); border: 1px solid var(--gold); display: grid; place-items: center; }
+    .brand-mark img { width: 20px; height: 30px; object-fit: contain; }
+    .brand-name { font-weight: 900; font-size: 17px; }
+    .brand-name span { color: var(--gold); }
+    .back { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 15px; }
+    .back:hover { color: var(--gold); }
+
+    .hero { padding: 72px 0 40px; background: radial-gradient(circle at 85% 0%, rgba(201,161,74,.14), transparent 45%), linear-gradient(160deg, var(--green-deep), var(--black) 75%); }
+    .eyebrow { color: var(--gold); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; font-size: 12px; margin: 0 0 10px; }
+    h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin: 0 0 14px; font-weight: 900; }
+    .lead { color: var(--muted); font-size: 18px; max-width: 620px; margin: 0 0 24px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; background: var(--gold); color: var(--black); font-weight: 800; font-size: 15px; text-decoration: none; }
+    .btn:hover { background: var(--gold-dark); }
+
+    main { max-width: 820px; margin: 0 auto; padding: 40px 22px 80px; }
+    .status { color: var(--muted); text-align: center; padding: 40px 0; }
+    .issue { background: var(--paper); color: var(--ink); border-radius: 18px; overflow: hidden; margin-bottom: 22px; scroll-margin-top: 90px; }
+    .issue-top { background: var(--green); border-bottom: 4px solid var(--gold); padding: 22px 26px; color: var(--white); }
+    .issue-top small { color: var(--gold); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+    .issue-top h2 { margin: 4px 0 0; font-size: 24px; line-height: 1.25; font-weight: 900; }
+    .issue-body { padding: 24px 26px 8px; font-size: 17px; line-height: 1.7; }
+    .issue-body p { margin: 0 0 16px; }
+    .issue-body.clipped { max-height: 220px; overflow: hidden; position: relative; }
+    .issue-body.clipped::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(rgba(250,247,240,0), var(--paper)); }
+    .issue-foot { padding: 6px 26px 22px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .toggle { background: none; border: 2px solid var(--green); color: var(--green); font: inherit; font-weight: 800; font-size: 14px; padding: 9px 18px; border-radius: 999px; cursor: pointer; min-height: 44px; }
+    .toggle:hover { background: var(--green); color: var(--white); }
+    .copy { background: none; border: none; color: var(--ink-soft); font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; text-decoration: underline; min-height: 44px; }
+
+    .join { background: var(--brown); border: 1px solid var(--brown-line); border-radius: 18px; padding: 28px; text-align: center; margin-top: 36px; }
+    .join h2 { margin: 0 0 8px; font-size: 24px; font-weight: 900; }
+    .join p { color: var(--muted); margin: 0 0 18px; }
+
+    footer { padding: 34px 0; border-top: 1px solid var(--brown-line); color: var(--muted); font-size: 14px; }
+    footer a { color: var(--gold); font-weight: 800; text-decoration: none; }
+    @media (max-width: 600px) { .hero { padding: 52px 0 28px; } .issue-top, .issue-body, .issue-foot { padding-left: 20px; padding-right: 20px; } }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="/" class="brand" aria-label="Sumanpa Academy home">
+        <div class="brand-mark"><img src="/logo-mask.png" alt="" /></div>
+        <div class="brand-name">Sumanpa <span>Academy</span></div>
+      </a>
+      <a href="/" class="back">&larr; Home</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Newsletter archive</p>
+      <h1>Past newsletters</h1>
+      <p class="lead">Every newsletter we have sent, newest first. Catch up on anything you missed.</p>
+      <a class="btn" href="/#join">Get the next one in your inbox</a>
+    </div>
+  </section>
+  <div class="kente" aria-hidden="true"></div>
+
+  <main>
+    <div id="list"><p class="status">Loading newsletters…</p></div>
+
+    <section class="join">
+      <h2>Never miss one</h2>
+      <p>Join the Sumanpa Academy newsletter and get the next issue straight to your inbox.</p>
+      <a class="btn" href="/#join">Join the newsletter</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Questions? Message us on Instagram <a href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">@sumanpaacademy</a></div>
+  </footer>
+
+  <script>
+    // Your Supabase project (public values, safe to keep on this page)
+    const SUPABASE_URL = "https://sdkdkefxhvotegfyeosp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_JhJg5PsKhjwkhNQoaYhxhQ_VdXyM92X";
+
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+    const fmt = (d) => new Date(d).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+    // Same paragraphs as the email; {first_name} becomes "friend" on the public page
+    const toHtml = (text) => esc(text).replaceAll("{first_name}", "friend")
+      .split(/\n\s*\n/).map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("");
+
+    async function load() {
+      const list = document.getElementById("list");
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/public_newsletters?select=id,subject,body,created_at&order=created_at.desc`, {
+          headers: { "apikey": SUPABASE_KEY }
+        });
+        if (!res.ok) throw new Error("load failed");
+        const rows = await res.json();
+        if (!rows.length) { list.innerHTML = `<p class="status">No newsletters yet. The first one is on its way.</p>`; return; }
+        list.innerHTML = rows.map((n, i) => `
+          <article class="issue" id="issue-${n.id}">
+            <div class="issue-top"><small>${fmt(n.created_at)}</small><h2>${esc(n.subject)}</h2></div>
+            <div class="issue-body ${i === 0 ? "" : "clipped"}">${toHtml(n.body)}</div>
+            <div class="issue-foot">
+              ${i === 0 ? "" : `<button class="toggle" aria-expanded="false">Read the full newsletter</button>`}
+              <button class="copy" data-id="${n.id}">Copy link</button>
+            </div>
+          </article>`).join("");
+
+        list.querySelectorAll(".toggle").forEach(b => b.addEventListener("click", () => {
+          const body = b.closest(".issue").querySelector(".issue-body");
+          const open = body.classList.toggle("clipped") === false;
+          b.textContent = open ? "Show less" : "Read the full newsletter";
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        }));
+        list.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
+          const url = `${location.origin}${location.pathname}#issue-${b.dataset.id}`;
+          try { await navigator.clipboard.writeText(url); b.textContent = "Link copied"; }
+          catch (e) { b.textContent = url; }
+        }));
+
+        // Opened from a shared link: expand and jump to that newsletter
+        const target = location.hash && document.querySelector(location.hash);
+        if (target) {
+          const body = target.querySelector(".issue-body"); body.classList.remove("clipped");
+          const t = target.querySelector(".toggle"); if (t) { t.textContent = "Show less"; t.setAttribute("aria-expanded", "true"); }
+          target.scrollIntoView();
+        }
+      } catch (e) {
+        list.innerHTML = `<p class="status">Couldn't load the newsletters right now. Please try again in a moment.</p>`;
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
