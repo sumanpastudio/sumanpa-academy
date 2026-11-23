@@ -52,6 +52,9 @@
     article h3 { color: var(--green); font-size: 21px; line-height: 1.3; font-weight: 800; margin: 36px 0 10px; }
     strong { font-weight: 800; }
 
+    .slide { max-width: 480px; margin: 36px auto; padding: 0 22px; }
+    .slide.in-article { padding: 0; margin: 32px auto 36px; }
+    .slide img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; box-shadow: 0 14px 34px rgba(42,28,18,.18); }
     .photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 36px auto; max-width: 1000px; padding: 0 22px; }
     .photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
 
@@ -110,11 +113,9 @@
     <p class="intro">Starting a fitness routine is easy to romanticize. A new year, a new gym membership, a burst of motivation can get you started. The harder question is what happens in month six, when the motivation has gone quiet and life is loud. This article comes from more than ten years of training four to five times a week, in the gym, by choice, and learning that the answer is not more willpower. It is a system, a reason, and a bit of grace.</p>
   </article>
 
-  <div class="photos">
+  <figure class="slide">
     <img src="/images/life-consistency-train-on-purpose.jpg" alt="Training at the gym. 4 to 5 days a week. On purpose." />
-    <img src="/images/life-consistency-train-together.jpg" alt="Training together at the gym. Train together. Stay consistent." />
-    <img src="/images/life-consistency-document-it.jpg" alt="A mirror selfie at the gym. Document it. Trust the process." />
-  </div>
+  </figure>
 
   <article style="padding-top: 0">
     <h2>How we train</h2>
@@ -123,11 +124,17 @@
     <p>The most important part is not the fitness programme. It is that we are on the same page about why we go to the gym. Training is a life decision for us, and we made it on purpose because we understand what it gives back over the long run. That shared reason is what keeps us going back especially on the days neither of us feels like going.</p>
     <p>When we miss our workouts, it is because of circumstances outside of our control. We do not beat ourselves up. We make do with what we have until we are back in routine.</p>
     <p><strong>Our goal.</strong> Stay consistent with our four to five sessions a week and document the progress along the way. Our workouts include lifts and movements that build strength and flexibility, so as long as we keep showing up, those gains will follow naturally. Tracking our workouts has helped more than anything else, because the numbers show you what is really happening.</p>
+    <figure class="slide in-article">
+      <img src="/images/life-consistency-train-together.jpg" alt="Training together at the gym. Train together. Stay consistent." loading="lazy" />
+    </figure>
 
     <h2>Five tips for staying consistent</h2>
 
     <h3>1. Track it with numbers, photos and videos</h3>
     <p>Tracking is the best accountability there is. When you log your workouts, you see the numbers move, up or down, and both tell you something useful. Take photos and short videos of your progress too. Once you start seeing change, you will wish you had a record of your early days. Take the first photo now, even if it feels awkward.</p>
+    <figure class="slide in-article">
+      <img src="/images/life-consistency-document-it.jpg" alt="A mirror selfie at the gym. Document it. Trust the process." loading="lazy" />
+    </figure>
 
     <h3>2. Be intentional, because motivation will leave</h3>
     <p>You will not always feel motivated, so do not build your plan on motivation. Build a habit instead. Habit becomes discipline, and discipline is what carries you through the months when enthusiasm is low, especially when the weather gets too cold, or even when the weather is too nice! Put your workout sessions in your calendar and treat them like any other commitment.</p>
@@ -149,8 +156,8 @@
 
     <section class="cta">
       <h2>Train with us</h2>
-      <p>If you are ready for a challenge, add your name to our free fitness accountability group. We will help you stick to your fitness goals, whatever that looks like for you.</p>
-      <a class="btn" href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">Join the accountability group</a>
+      <p>If you want help staying consistent, add your name to our free fitness accountability group. We will help you stick to your fitness goals, whatever that looks like for you.</p>
+      <a class="btn" href="/#session">Sign up for the fitness accountability group</a>
     </section>
 
     <p class="note">This article is general information, not medical advice. If you have a health condition or concerns, check with your doctor before starting a new programme.</p>
