@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From 4,000 to 253,000 Tonnes: Can Ghana Grow Its Own Chicken Again? | Sumanpa Academy</title>
+  <meta name="description" content="Roughly four in five chickens eaten in Ghana are imported. Feed costs are the reason, and also the opportunity." />
+  <meta name="theme-color" content="#1f5c3a" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Nunito Sans is a backup for devices without Avenir -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #1f5c3a; --green-deep: #153f28; --green-light: #2c7a4f;
+      --gold: #c9a14a; --gold-dark: #a9842f;
+      --brown: #2a1c12; --brown-line: #4a3526;
+      --black: #0d0b09; --white: #ffffff; --muted: #d9cfc4;
+      --paper: #faf7f0; --ink: #2a1c12; --ink-soft: #5c4a3b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Avenir", "Avenir Next", "Nunito Sans", "Segoe UI", sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--green); }
+    img { max-width: 100%; display: block; }
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+    .kente { height: 10px; background: repeating-linear-gradient(90deg, var(--gold) 0 40px, var(--black) 40px 52px, var(--green-light) 52px 92px, var(--black) 92px 104px, var(--gold) 104px 120px, var(--brown) 120px 160px); }
+
+    header.nav { position: sticky; top: 0; z-index: 50; background: rgba(13,11,9,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,161,74,.18); color: var(--white); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); }
+    .brand-mark { width: 36px; height: 36px; border-radius: 9px; background: var(--green); border: 1px solid var(--gold); display: grid; place-items: center; }
+    .brand-mark img { width: 20px; height: 30px; object-fit: contain; }
+    .brand-name { font-weight: 900; font-size: 17px; }
+    .brand-name span { color: var(--gold); }
+    .back { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 15px; }
+    .back:hover { color: var(--gold); }
+
+    .head { background: linear-gradient(160deg, var(--green-deep), var(--black) 80%); color: var(--white); padding: 64px 0 52px; }
+    .head-in { max-width: 760px; margin: 0 auto; padding: 0 22px; }
+    .eyebrow { color: var(--gold); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; font-size: 12px; margin: 0 0 14px; }
+    h1 { font-size: clamp(32px, 5vw, 50px); line-height: 1.12; margin: 0 0 18px; font-weight: 900; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; color: var(--muted); font-size: 14px; font-weight: 600; }
+    .tag { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); background: rgba(201,161,74,.16); padding: 4px 10px; border-radius: 999px; text-decoration: none; }
+
+    article { max-width: 760px; margin: 0 auto; padding: 48px 22px 24px; font-size: 18px; }
+    article p { margin: 0 0 20px; }
+    .intro { font-size: 20px; line-height: 1.65; color: var(--ink); }
+    article h2 { color: var(--green); font-size: 30px; line-height: 1.2; font-weight: 900; margin: 52px 0 16px; }
+    article h3 { color: var(--green); font-size: 21px; line-height: 1.3; font-weight: 800; margin: 36px 0 10px; }
+    strong { font-weight: 800; }
+
+    .slide { max-width: 480px; margin: 36px auto; padding: 0 22px; }
+    .slide.in-article { padding: 0; margin: 32px auto 36px; }
+    .slide img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; box-shadow: 0 14px 34px rgba(42,28,18,.18); }
+    .photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 36px auto; max-width: 1000px; padding: 0 22px; }
+    .photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
+
+    .learn { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 26px; align-items: start; margin: 8px 0 20px; }
+    .learn img { border-radius: 14px; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .callout { background: #f1eadb; border-radius: 14px; padding: 18px 20px; margin: 0; font-size: 17px; }
+
+    .cta { background: var(--green); color: var(--white); border-radius: 20px; padding: 32px; margin: 52px 0 24px; border-bottom: 4px solid var(--gold); }
+    .cta h2 { color: var(--white); margin: 0 0 10px; }
+    .cta p { color: #e9e0d2; margin: 0 0 20px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; background: var(--gold); color: var(--black); font-weight: 800; font-size: 16px; text-decoration: none; }
+    .btn:hover { background: var(--gold-dark); }
+    .note { font-size: 14px; color: var(--ink-soft); border-top: 1px solid #e4dccd; padding-top: 16px; margin-top: 28px; }
+
+    .more { max-width: 760px; margin: 0 auto 64px; padding: 0 22px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .more a { font-weight: 800; text-decoration: none; color: var(--green); }
+    .more a:hover { color: var(--gold-dark); }
+
+    .share { display: inline-flex; }
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 999px; border: 2px solid rgba(255,255,255,.3); background: transparent; color: var(--white); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+    .share-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .share-btn.light { border-color: var(--green); color: var(--green); min-height: 48px; padding: 10px 22px; font-size: 15px; }
+    .share-btn.light:hover { background: var(--green); color: var(--white); }
+    .share-end { max-width: 760px; margin: 0 auto 40px; padding: 24px 22px 0; text-align: center; border-top: 1px solid #e4dccd; }
+    .share-end p { margin: 0 0 14px; font-weight: 700; color: var(--ink); }
+    .share-menu { position: absolute; z-index: 100; min-width: 200px; background: var(--white); color: var(--ink); border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,.25); padding: 6px; display: flex; flex-direction: column; }
+    .share-menu[hidden] { display: none; }
+    .share-menu button, .share-menu a { display: block; text-align: left; background: none; border: none; font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; padding: 12px 14px; border-radius: 10px; cursor: pointer; min-height: 44px; }
+    .share-menu button:hover, .share-menu a:hover { background: #f1eadb; color: var(--green); }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px); background: var(--green); color: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 22px; border-radius: 999px; font-weight: 800; font-size: 15px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 200; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    footer { background: var(--black); color: var(--muted); padding: 34px 0; font-size: 14px; }
+    footer a { color: var(--gold); font-weight: 800; text-decoration: none; }
+
+    @media (max-width: 700px) {
+      article { font-size: 17px; }
+      .intro { font-size: 18px; }
+      .photos { grid-template-columns: 1fr; max-width: 480px; }
+      .learn { grid-template-columns: 1fr; }
+      .learn img { max-width: 280px; }
+      .cta { padding: 24px; }
+    }
+    figure.fig { margin: 32px 0 36px; }
+    figure.fig img { width: 100%; border-radius: 14px; }
+    figure.fig.narrow { max-width: 460px; margin-left: auto; margin-right: auto; }
+    figure.fig .fig-title { color: var(--green); font-weight: 800; font-size: 17px; margin: 0 0 12px; }
+    figcaption { font-size: 14px; color: var(--ink-soft); font-style: italic; margin-top: 10px; line-height: 1.5; }
+    .chart-box { background: #ffffff; border: 1px solid #e4dccd; border-radius: 14px; padding: 18px; }
+    .chart-box img { border-radius: 0; }
+    article ul, article ol { margin: 0 0 22px; padding-left: 24px; }
+    article li { margin: 0 0 12px; }
+    .loop { background: #f1eadb; border-left: 0; border-radius: 14px; padding: 18px 20px; margin: 8px 0 22px; }
+    .loop strong { color: var(--green); }
+    .sources { font-size: 15px; color: var(--ink-soft); }
+    .sources li { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="/" class="brand" aria-label="Sumanpa Academy home">
+        <div class="brand-mark"><img src="/logo-mask.png" alt="" /></div>
+        <div class="brand-name">Sumanpa <span>Academy</span></div>
+      </a>
+      <a href="/business" class="back">&larr; All Business articles</a>
+    </div>
+  </header>
+
+  <section class="head">
+    <div class="head-in">
+      <p class="eyebrow">Sumanpa Academy · 02 Business</p>
+      <h1>From 4,000 to 253,000 Tonnes: Can Ghana Grow Its Own Chicken Again?</h1>
+      <div class="meta">
+        <span><time datetime="2026-11-24">24 November 2026</time></span>
+        <a class="tag" href="/business#agriculture">Agriculture</a>
+        <div class="share"><button class="share-btn" type="button" aria-haspopup="true" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button></div>
+      </div>
+    </div>
+  </section>
+  <div class="kente" aria-hidden="true"></div>
+
+  <article>
+    <p class="intro">Roughly four in five chickens eaten in Ghana are imported. Feed costs are the reason, and also the opportunity.</p>
+
+    <figure class="fig narrow">
+      <img src="/images/business-chicken-farm-port.jpg" alt="Broiler chickens on a Ghanaian farm, and a port receiving frozen chicken." />
+      <figcaption>Illustration: broiler chickens on a Ghanaian farm, and a port receiving frozen chicken.</figcaption>
+    </figure>
+
+    <p>In 1998, Ghana imported about 4,000 tonnes of chicken, according to the minister. By 2004 it was 104,000 tonnes. By 2022, USDA estimates put imports at about 253,000 tonnes. Today, according to USDA figures, roughly four in five of the chickens Ghanaians eat come from abroad, mostly as cut parts from countries including Belgium, the United States, Brazil, Poland and the Netherlands. The minister has gone further, saying that more than 95 percent of the chicken consumed in Ghana is imported. This article uses the lower USDA figure, which can be checked against the published report.</p>
+
+    <figure class="fig">
+      <p class="fig-title">Ghana&rsquo;s chicken imports grew about 63 times in 24 years</p>
+      <div class="chart-box"><img src="/images/business-chicken-imports-chart.jpg" alt="Bar chart of Ghana's chicken imports: 4,000 tonnes in 1998 and 104,000 tonnes in 2004 (Minister Opoku), 253,000 tonnes in 2022 (USDA estimate)." loading="lazy" /></div>
+      <figcaption>Sources: Minister Eric Opoku via GhanaWeb, 14 Nov 2025 (1998, 2004); USDA GAIN GH2024-0002, Table 1.1 (2022 imports). Different sources, so read the trend, not exact steps.</figcaption>
+    </figure>
+
+    <p>Ghana has farmers, land and a population that loves chicken. So why is the market dominated by frozen birds from thousands of kilometres away? The answer is not a lack of effort on local farms. It starts in the feed bag. This article looks at what it would take to reverse the trend, and why the farmer who solves the feed problem may be sitting on one of the better investment opportunities in Ghanaian agriculture.</p>
+
+    <h2>Why local chicken costs more: feed</h2>
+    <p>Feed makes up roughly 70 percent of the cost of raising a chicken, according to a Ghanaian research institute and the national poultry farmers&rsquo; association, so the price of a bird is largely the price of what it eats. For a processed local bird, feed alone is about 42 percent of the selling price. A typical ration is built on two crops: maize and soybean meal.</p>
+
+    <figure class="fig narrow">
+      <img src="/images/business-chicken-feed-cost.jpg" alt="The real cost: feed is about 70% of the cost of raising a chicken. Feed alone is about 42% of the price of a processed local bird." loading="lazy" />
+    </figure>
+
+    <p>Drought has made feed supply less certain. In August 2024 the government banned exports of maize, rice and soybeans to protect domestic supply after dry spells hit eight regions.</p>
+
+    <h2>The price gap at the counter</h2>
+    <p>Walk into a Ghanaian market and the choice is rarely about taste. It is about price. In figures from late 2024, a processed 2.0 kg bird from a local farm sold for GH&cent;96.70, which works out to roughly GH&cent;49 per kg. Imported broiler (chicken raised specifically for meat production) averaged about GH&cent;40 per kg. That puts local chicken about a fifth more expensive. A 2023 University of Ghana study of markets in four regions put the imported discount higher, at 27 to 30 percent, even after a 35 percent increase in tariffs.</p>
+    <p>The cost breakdown shows why. For that 2.0 kg bird, feed alone comes to about GH&cent;40.50, around 42 percent of the selling price. Processing, packaging and cold storage add more, and the rest has to cover chicks, vaccines, labour, transport and the farmer&rsquo;s margin.</p>
+    <p>Efficiency matters too. In one Ghanaian study, the research institute&rsquo;s own flock needed 1.56 kg of feed per kg of live weight, while other farmers needed 2.12 kg. That is about 36 percent more feed for the same bird. Research comparing typical Ghanaian broiler farms with European ones found production costs that are well above German and Dutch levels.</p>
+    <p class="loop"><strong>The loop.</strong> Feed is expensive because key ingredients are imported. Local farmers who pay those prices cannot match the shelf price of imported frozen chicken. When they cannot meet demand at that price, the gap is filled by imports. Each step reinforces the next.</p>
+
+    <h2>What it would take to grow local production</h2>
+    <p>Replacing imported chicken is not a single problem. It is four, and each one depends on the others.</p>
+    <ol>
+      <li><strong>Raise efficiency on the farm.</strong> The average farm uses about 36 percent more feed per bird than the research institute&rsquo;s own flock. Better breeds, housing and feeding practice would lower the cost of every bird.</li>
+      <li><strong>Build a steadier feed supply.</strong> Maize and soybean meal are the main feed crops, so a poultry business that depends on them needs buyers who sign contracts ahead of planting, storage that keeps grain through the lean months, and prices that stay predictable from year to year.</li>
+      <li><strong>Fix processing and the cold chain.</strong> Frozen imports arrive packed, priced and ready to store. A local bird has to be slaughtered, dressed, packaged and kept cold. In the Graphic article&rsquo;s figures, processing costs GH&cent;6 per bird, packaging GH&cent;24 per box and cold storage GH&cent;1 per bird. Cold transport adds more, at about GH&cent;3,500 per 5 tonnes when farmers share a vehicle. Shared processing and cold storage, where farmers split these costs, would help most because small farms cannot afford them alone.</li>
+      <li><strong>Shorten the chain between farm and table.</strong> Every step between the farm and the counter adds cost, from processing and packaging to cold storage and transport. Fewer handovers and shared facilities would leave more of the price with the farmer.</li>
+    </ol>
+    <p>The honest summary is this: local chicken can compete only when feed costs fall, and feed costs fall only when yields, storage and supply contracts improve together.</p>
+
+    <h2>Where the opportunity is, and where it is not</h2>
+    <p>The market is large and already proven. Ghanaians buy hundreds of thousands of tonnes of chicken a year, and roughly four in five birds are imported. Any local producer who can sell at a competitive price is not looking for demand. The demand is there.</p>
+    <p>The difficulty is the price. Local chicken costs about GH&cent;9 more per kg than imported, and for a typical local bird feed alone is about 42 percent of the selling price. That means the opportunity is not simply &ldquo;start a poultry farm.&rdquo; It is to lower the cost of what goes into the bird. There are four places to look:</p>
+    <ul>
+      <li><strong>Feed supply.</strong> Buying maize and soybeans directly from farmers under contract, storing them, and milling feed can reduce the price volatility that hurts feed buyers now.</li>
+      <li><strong>Farm efficiency.</strong> A flock that needs 1.56 kg of feed per kg of weight instead of 2.12 saves roughly a third of its feed bill.</li>
+      <li><strong>Shared processing and cold storage.</strong> Small farms struggle to afford these alone. A facility that serves many of them could earn fees while lowering their costs.</li>
+      <li><strong>The distribution chain.</strong> Every handover between farm and counter adds cost, so a business that connects the two for a fair margin has room to work.</li>
+    </ul>
+
+    <h2>The risks</h2>
+    <p>An honest reading of the numbers shows how thin the margins are. On a bird that sells for GH&cent;96.70, feed alone costs GH&cent;40.50. The rest must pay for processing, packaging, cold storage, chicks, vaccines, labour, transport and the farmer&rsquo;s profit. Reliable figures for most of those items were not available, so no one should assume a profit until they have been checked.</p>
+    <ul>
+      <li><strong>Import competition.</strong> Frozen imported chicken arrives at a lower price, and a local producer must match it or sell on freshness and quality.</li>
+      <li><strong>Weather.</strong> A poor harvest can tighten feed grain supply quickly.</li>
+      <li><strong>Policy changes.</strong> Rules on grain and chicken trade can change with little warning.</li>
+      <li><strong>Currency.</strong> Imported chicken and feed ingredients are priced abroad, so exchange rate moves affect the comparison between local and imported prices.</li>
+      <li><strong>Thin evidence.</strong> Several figures in this article come from single sources or are dated. Anyone planning to invest should test them against current prices and a real farm&rsquo;s records.</li>
+    </ul>
+
+    <h3>Questions worth asking before putting money in</h3>
+    <ol>
+      <li>What does a chick, a vaccine programme and a month of labour cost today, and what is left after those?</li>
+      <li>Can the farm or mill secure maize and soybeans under contract at a price that holds through a bad harvest?</li>
+      <li>Is there reliable cold storage and transport within reach, and who pays for it?</li>
+      <li>Who will buy the birds, at what price, and how quickly do they pay?</li>
+    </ol>
+    <p class="note" style="margin-top:0">This article is for information only and is not financial advice. Readers should get professional advice before investing.</p>
+
+    <h2>Closing</h2>
+    <p>Ghana did not become a chicken importer overnight, and it will not stop being one overnight. The slide from 4,000 tonnes in 1998 to about 253,000 tonnes in 2022 took more than two decades, and it followed the cost of feed at every step.</p>
+    <p>But the same numbers point the other way. Feed is the largest cost in the business, so it is also the place where the right change counts most. Better yields, steadier grain supply, shared cold storage and a shorter path from farm to table are not exotic ideas. They are practical, and each one lowers the cost of a bird.</p>
+    <p>For Ghanaians at home and abroad, that makes this more than a story about imports. It is a question about where we put our money, our skills and our attention. The demand is already there. What it needs now is someone who can solve the feed problem.</p>
+
+    <section class="cta">
+      <h2>Talk it through with us</h2>
+      <p>Thinking about a business idea like this, or where to put your money and skills? Book a one-on-one private session and we will work through it with you.</p>
+      <a class="btn" href="/#session">Book a private session</a>
+    </section>
+
+    <h2>Sources</h2>
+    <ul class="sources">
+      <li>Earl Ankrah, &ldquo;Home to roost: MoFA, World Bank injecting $12m into poultry sector,&rdquo; <em>Graphic Online</em>, 13 January 2025 (figures as of November 2024). graphic.com.gh</li>
+      <li>&ldquo;Ghana spends $400 million annually on chicken imports,&rdquo; <em>GhanaWeb</em>, 14 November 2025 (interview with Minister Eric Opoku; 1998 and 2004 import figures). ghanaweb.com</li>
+      <li>USDA Foreign Agricultural Service, <em>Ghana Poultry Voluntary Update 2024</em>, GAIN report GH2024-0002, 8 February 2024 (Table 1.1, chicken meat supply and distribution; 2022 imports).</li>
+      <li>Biotechnology and Nuclear Agriculture Research Institute (BNARI), study on Ghana&rsquo;s poultry industry and import substitution (feed conversion of 1.56 vs 2.12 kg of feed per kg of live weight; feed above 70 percent of broiler production cost).</li>
+      <li>Chibanda et al., &ldquo;Improving broiler farm competitiveness in Ghana and Senegal: insights from comparative analysis with Germany and the Netherlands,&rdquo; <em>Agriculture &amp; Food Security</em>, 2025. Springer</li>
+      <li>Onumah and Ayeduvor, &ldquo;Dynamics of the poultry market in Ghana,&rdquo; <em>Journal of Agricultural Sciences (Belgrade)</em>, 2023 (import share, origins, 27 to 30 percent price gap). University of Ghana repository</li>
+      <li>&ldquo;Cheap imports, high feed costs threaten Ghana&rsquo;s poultry sector,&rdquo; <em>GhanaWeb</em>, 5 January 2026 (feed at nearly 70 percent of production cost). ghanaweb.com</li>
+      <li>&ldquo;High feed costs driving up prices of local poultry products,&rdquo; <em>Ghanaian Times</em> via AllAfrica, 21 January 2026 (poultry farmers&rsquo; association president on feed at 65 to 70 percent). allafrica.com</li>
+      <li>&ldquo;Govt bans export of grains with immediate effect,&rdquo; <em>AllAfrica</em>, 27 August 2024. allafrica.com</li>
+    </ul>
+  </article>
+
+  <div class="share-end">
+    <p>Found this useful? Share it with someone thinking about business in Ghana.</p>
+    <div class="share"><button class="share-btn light" type="button" aria-haspopup="true" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button></div>
+  </div>
+
+  <div class="share-menu" id="share-menu" role="menu" hidden>
+    <button role="menuitem" data-act="copy">Copy link</button>
+    <a role="menuitem" data-act="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+    <a role="menuitem" data-act="facebook" target="_blank" rel="noopener">Facebook</a>
+    <a role="menuitem" data-act="x" target="_blank" rel="noopener">X (Twitter)</a>
+    <a role="menuitem" data-act="email">Email</a>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <nav class="more" aria-label="More articles">
+    <a href="/business">&larr; All Business articles</a>
+    <a href="/life">Read our Life articles &rarr;</a>
+  </nav>
+
+  <footer>
+    <div class="wrap">Questions? Message us on Instagram <a href="https://www.instagram.com/sumanpaacademy" target="_blank" rel="noopener">@sumanpaacademy</a></div>
+  </footer>
+  <script>
+    (function () {
+      const url = "https://www.sumanpaacademy.com/business/ghana-chicken";
+      const title = document.querySelector("h1").textContent.trim();
+      const text = title + " | Sumanpa Academy";
+      const menu = document.getElementById("share-menu");
+      const toast = document.getElementById("toast");
+      const enc = encodeURIComponent;
+      const links = {
+        whatsapp: "https://wa.me/?text=" + enc(text + " " + url),
+        facebook: "https://www.facebook.com/sharer/sharer.php?u=" + enc(url),
+        x: "https://twitter.com/intent/tweet?text=" + enc(text) + "&url=" + enc(url),
+        email: "mailto:?subject=" + enc(text) + "&body=" + enc("I thought you'd like this: " + url)
+      };
+      menu.querySelectorAll("a").forEach(a => a.href = links[a.dataset.act]);
+      let openBtn = null;
+
+      function showToast(msg) { toast.textContent = msg; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2200); }
+      function closeMenu() { menu.hidden = true; if (openBtn) openBtn.setAttribute("aria-expanded", "false"); openBtn = null; }
+      async function copyLink() {
+        try { await navigator.clipboard.writeText(url); showToast("Link copied"); }
+        catch (e) { window.prompt ? showToast(url) : showToast(url); }
+      }
+
+      document.querySelectorAll(".share-btn").forEach(btn => btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+          try { await navigator.share({ title: text, url }); } catch (err) {}
+          return;
+        }
+        if (openBtn === btn) return closeMenu();
+        const r = btn.getBoundingClientRect();
+        menu.hidden = false;
+        menu.style.top = (window.scrollY + r.bottom + 8) + "px";
+        menu.style.left = Math.max(12, Math.min(window.scrollX + r.left, window.scrollX + document.documentElement.clientWidth - menu.offsetWidth - 12)) + "px";
+        btn.setAttribute("aria-expanded", "true");
+        openBtn = btn;
+        menu.querySelector("button").focus();
+      }));
+      menu.querySelector('[data-act="copy"]').addEventListener("click", () => { copyLink(); closeMenu(); });
+      menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+      document.addEventListener("click", (e) => { if (!menu.contains(e.target)) closeMenu(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+    })();
+  </script>
+</body>
+</html>
